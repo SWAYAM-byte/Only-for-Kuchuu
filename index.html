@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Only for Kavya ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#fff;
+}
+
+/* 🔐 LOCK SCREEN */
+#lockScreen{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.lock-box{
+  background:rgba(255,255,255,0.25);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  backdrop-filter:blur(10px);
+  animation:scaleIn 1.2s ease;
+}
+.lock-box h2{
+  font-family:'Dancing Script',cursive;
+  font-size:2.2rem;
+}
+.lock-box input{
+  margin-top:15px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:12px;
+  text-align:center;
+}
+.lock-box button{
+  margin-top:15px;
+  padding:10px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:#fff;
+  font-size:1rem;
+}
+#error{display:none;margin-top:10px}
+
+/* MAIN */
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:30px 15px;
+  text-align:center;
+  opacity:0;
+  transform:scale(0.95);
+  transition:all 1.2s ease;
+}
+.container.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+h1{
+  font-family:'Dancing Script',cursive;
+  font-size:2.6rem;
+  margin-bottom:10px;
+}
+
+/* PHOTO */
+.photo{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  margin:20px auto;
+  border:6px solid #fff;
+  box-shadow:0 0 30px rgba(255,255,255,0.9);
+  background:url("her.jpeg") center/cover no-repeat;
+  animation:pulse 3s infinite;
+}
+
+/* MESSAGE */
+.message{
+  background:rgba(255,255,255,0.25);
+  padding:22px;
+  border-radius:18px;
+  backdrop-filter:blur(8px);
+}
+#typewriter{
+  font-size:1.05rem;
+  line-height:1.7;
+  min-height:180px;
+  white-space:pre-wrap;
+}
+
+/* BUTTONS */
+button{
+  margin-top:20px;
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:#fff;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+/* FORGIVE BOX */
+#forgiveBox{
+  display:none;
+  margin-top:25px;
+  background:rgba(255,255,255,0.35);
+  padding:20px;
+  border-radius:18px;
+  animation:fadeIn 1s ease;
+}
+
+/* FLOATING HEARTS */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{
+  to{transform:translateY(-100vh);opacity:0}
+}
+
+/* ANIMATIONS */
+@keyframes scaleIn{from{transform:scale(0.7)}to{transform:scale(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{50%{transform:scale(1.05)}}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 LOCK -->
+<div id="lockScreen">
+  <div class="lock-box">
+    <h2>🔐 Only for you 💖</h2>
+    <p>Enter your name</p>
+    <input id="unlockInput" placeholder="Your name...">
+    <button onclick="unlock()">Unlock 💫</button>
+    <p id="error">Wrong name 😢</p>
+  </div>
+</div>
+
+<!-- 💖 MAIN -->
+<div class="container" id="main">
+  <h1>I'm Sorry Kavya 💔</h1>
+
+  <div class="photo"></div>
+
+  <div class="message">
+    <div id="typewriter"></div>
+  </div>
+
+  <button onclick="forgive()">Forgive Me 💖</button>
+
+  <div id="forgiveBox">
+    Kavya ❤️<br><br>
+    Thank you for forgiving me.  
+    I promise to love you better, always 🫶
+  </div>
+
+  <button onclick="playMusic()">Play Our Song 🎶</button>
+</div>
+
+<!-- 🎶 MUSIC -->
+<audio id="song" loop>
+  <source src="jugraafiya.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const herName="kavya";
+
+/* UNLOCK */
+function unlock(){
+  const val=document.getElementById("unlockInput").value.trim().toLowerCase();
+  if(val===herName){
+    document.getElementById("lockScreen").style.display="none";
+    document.getElementById("main").classList.add("show");
+  }else{
+    document.getElementById("error").style.display="block";
+  }
+}
+
+/* TYPEWRITER */
+const text=`Hey Kavya ❤️
+
+I know I hurt you and I’m truly sorry.
+Hurting you was never my intention.
+
+You are my peace, my happiness,
+and every moment without you feels empty.
+
+Please forgive me and give me one chance.
+I promise to love you better, always 💖`;
+
+let i=0;
+(function type(){
+  if(i<text.length){
+    document.getElementById("typewriter").innerHTML+=text.charAt(i++);
+    setTimeout(type,40);
+  }
+})();
+
+/* FORGIVE */
+function forgive(){
+  document.getElementById("forgiveBox").style.display="block";
+}
+
+/* MUSIC */
+function playMusic(){
+  document.getElementById("song").play();
+}
+
+/* HEARTS */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},450);
+</script>
+
+</body>
+</html>
